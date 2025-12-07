@@ -15,13 +15,13 @@ export function HomePage() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="absolute inset-0  from-gray-900 via-black to-black" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-black" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_50%)]" />
       
       <div className="relative container mx-auto px-4 py-8 max-w-7xl">
         <div className="flex justify-between items-center mb-10">
           <div>
-            <h1 className="text-4xl font-bold  from-white to-gray-400 bg-clip-text text-transparent mb-2">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-2">
               Home
             </h1>
             <p className="text-gray-400 text-sm">Welcome to your admin panel</p>
@@ -44,7 +44,7 @@ export function HomePage() {
           >
             <CardHeader>
               <div className="flex items-center gap-4">
-                <div className="rounded-2xl from-blue-500/20 to-purple-500/20 p-4 backdrop-blur-sm border border-blue-500/30">
+                <div className="rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-4 backdrop-blur-sm border border-blue-500/30">
                   <Users className="h-7 w-7 text-blue-400" />
                 </div>
                 <div>
@@ -66,7 +66,7 @@ export function HomePage() {
                   e.stopPropagation()
                   navigate("/contacts")
                 }}
-                className=" from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white w-full"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white w-full"
               >
                 <Users className="mr-2 h-4 w-4" />
                 Go to Contacts
@@ -81,7 +81,7 @@ export function HomePage() {
           >
             <CardHeader>
               <div className="flex items-center gap-4">
-                <div className="rounded-2xl from-green-500/20 to-teal-500/20 p-4 backdrop-blur-sm border border-green-500/30">
+                <div className="rounded-2xl bg-gradient-to-br from-green-500/20 to-teal-500/20 p-4 backdrop-blur-sm border border-green-500/30">
                   <FileText className="h-7 w-7 text-green-400" />
                 </div>
                 <div>
@@ -103,7 +103,7 @@ export function HomePage() {
                   e.stopPropagation()
                   navigate("/documents")
                 }}
-                className=" from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white w-full"
+                className="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white w-full"
               >
                 <FileText className="mr-2 h-4 w-4" />
                 Go to Documents
