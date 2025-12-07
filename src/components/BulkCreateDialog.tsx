@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { FileText, AlertCircle, CheckCircle2 } from "lucide-react"
+import { AlertCircle, CheckCircle2 } from "lucide-react"
 import { contactService } from "@/services/contactService"
 import type { BulkCreateResponse, CreateContactData, BulkError } from "@/types/contact"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+
 import {
   Dialog,
   DialogContent,
@@ -166,7 +166,7 @@ export function BulkCreateDialog({
               <Button
                 onClick={handleCreate}
                 disabled={!jsonInput.trim() || loading}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50"
+                className=" from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50"
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
@@ -234,7 +234,7 @@ export function BulkCreateDialog({
             <DialogFooter>
               <Button
                 onClick={handleClose}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                className=" from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
               >
                 Close
               </Button>
