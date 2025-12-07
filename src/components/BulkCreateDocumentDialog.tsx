@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { FileText, AlertCircle, CheckCircle2 } from "lucide-react"
+import { AlertCircle, CheckCircle2 } from "lucide-react"
 import { documentService } from "@/services/documentService"
 import type { BulkCreateResponse, CreateDocumentData, BulkError } from "@/types/document"
 import { Button } from "@/components/ui/button"
