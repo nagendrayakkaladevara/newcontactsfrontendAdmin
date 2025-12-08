@@ -12,12 +12,24 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { Card, CardContent } from "@/components/ui/card"
+import { MultiStepLoader } from "@/components/ui/multi-step-loader"
 
 interface BulkUploadDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   onSuccess: () => void
 }
+
+const uploadLoadingStates = [
+  { text: "Preparing your file for upload..." },
+  { text: "Validating file format and structure..." },
+  { text: "Uploading contacts to the server..." },
+  { text: "Processing contact data..." },
+  { text: "Validating contact information..." },
+  { text: "Creating contacts in database..." },
+  { text: "Finalizing upload process..." },
+  { text: "Almost done! Please wait..." },
+]
 
 export function BulkUploadDialog({
   open,
@@ -73,16 +85,34 @@ export function BulkUploadDialog({
   }
 
   const handleClose = () => {
+    if (loading) {
+      // Don't allow closing during upload
+      return
+    }
     setFile(null)
     setReplaceAll(false)
     setResult(null)
     setError(null)
+    setLoading(false)
     onOpenChange(false)
   }
 
+  const handleCancelUpload = () => {
+    setLoading(false)
+    setError("Upload cancelled by user")
+  }
+
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent onClose={handleClose} className="max-w-2xl max-h-[90vh] overflow-y-auto">
+    <>
+      <MultiStepLoader
+        loadingStates={uploadLoadingStates}
+        loading={loading}
+        duration={2000}
+        loop={true}
+        onCancel={handleCancelUpload}
+      />
+      <Dialog open={open} onOpenChange={handleClose}>
+        <DialogContent onClose={handleClose} className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Bulk Upload Contacts</DialogTitle>
           <DialogDescription>
@@ -241,6 +271,7 @@ export function BulkUploadDialog({
         )}
       </DialogContent>
     </Dialog>
+    </>
   )
 }
 

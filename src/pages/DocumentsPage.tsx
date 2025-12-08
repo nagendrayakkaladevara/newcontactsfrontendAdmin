@@ -118,6 +118,10 @@ export function DocumentsPage() {
         success("Document created successfully")
         setIsCreateDialogOpen(false)
         await loadDocuments()
+      } else {
+        // Handle API response with success: false
+        const errorMessage = response.message || "Failed to create document"
+        error(errorMessage)
       }
     } catch (err) {
       error(err instanceof Error ? err.message : "Failed to create document")
@@ -135,6 +139,10 @@ export function DocumentsPage() {
         setIsEditDialogOpen(false)
         setSelectedDocument(null)
         await loadDocuments()
+      } else {
+        // Handle API response with success: false
+        const errorMessage = response.message || "Failed to update document"
+        error(errorMessage)
       }
     } catch (err) {
       error(err instanceof Error ? err.message : "Failed to update document")
@@ -216,7 +224,7 @@ export function DocumentsPage() {
             <Button
               onClick={() => navigate("/")}
               variant="outline"
-              className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 disabled:opacity-50"
+              className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-50"
             >
               <Home className="mr-2 h-4 w-4" />
               Home
@@ -233,7 +241,7 @@ export function DocumentsPage() {
               variant="outline"
               onClick={() => setIsBulkCreateOpen(true)}
               disabled={actionLoading !== null}
-              className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 disabled:opacity-50"
+              className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-50"
             >
               <FileText className="mr-2 h-4 w-4" />
               Bulk Create

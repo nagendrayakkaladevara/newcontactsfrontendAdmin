@@ -126,11 +126,16 @@ export function ContactsPage() {
         success("Contact created successfully")
         setIsCreateDialogOpen(false)
         await loadContacts()
+      } else {
+        // Handle API response with success: false (shouldn't reach here if service throws)
+        const errorMessage = response.message || "Failed to create contact"
+        error(errorMessage)
       }
     } catch (err) {
-      error(
-        err instanceof Error ? err.message : "Failed to create contact"
-      )
+      // Extract error message from the error
+      const errorMessage = err instanceof Error ? err.message : "Failed to create contact"
+      console.error("Contact creation error:", err) // Debug log
+      error(errorMessage)
     } finally {
       setActionLoading(null)
     }
@@ -145,6 +150,10 @@ export function ContactsPage() {
         setIsEditDialogOpen(false)
         setSelectedContact(null)
         await loadContacts()
+      } else {
+        // Handle API response with success: false
+        const errorMessage = response.message || "Failed to update contact"
+        error(errorMessage)
       }
     } catch (err) {
       error(
@@ -229,7 +238,7 @@ export function ContactsPage() {
                 <Button
                   variant="outline"
                   onClick={() => navigate("/")}
-                  className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 disabled:opacity-50"
+                  className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-50"
                 >
                   <Home className="mr-2 h-4 w-4" />
                   Home
@@ -246,7 +255,7 @@ export function ContactsPage() {
               variant="outline"
               onClick={() => setIsBulkUploadOpen(true)}
               disabled={actionLoading !== null}
-              className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 disabled:opacity-50"
+              className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-50"
             >
               <Upload className="mr-2 h-4 w-4" />
               Bulk Upload
@@ -255,7 +264,7 @@ export function ContactsPage() {
               variant="outline"
               onClick={() => setIsBulkCreateOpen(true)}
               disabled={actionLoading !== null}
-              className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 disabled:opacity-50"
+              className="border-gray-700 bg-gray-900/50 text-gray-300 hover:bg-gray-800 hover:text-white disabled:opacity-50"
             >
               <FileText className="mr-2 h-4 w-4" />
               Bulk Create

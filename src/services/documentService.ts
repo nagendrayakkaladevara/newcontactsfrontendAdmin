@@ -32,6 +32,11 @@ class DocumentService {
       throw new Error(data.message || `HTTP error! status: ${response.status}`)
     }
 
+    // Check if API returned success: false even with HTTP 200
+    if (data && typeof data === 'object' && 'success' in data && data.success === false) {
+      throw new Error(data.message || "Operation failed")
+    }
+
     return data
   }
 
