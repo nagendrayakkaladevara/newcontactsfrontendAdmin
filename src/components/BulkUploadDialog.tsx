@@ -41,6 +41,7 @@ export function BulkUploadDialog({
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<BulkUploadResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [uploadSuccessful, setUploadSuccessful] = useState(false)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]
@@ -69,21 +70,16 @@ export function BulkUploadDialog({
     try {
       setLoading(true)
       setError(null)
+      setUploadSuccessful(false)
       const response = await contactService.bulkUpload(file, replaceAll)
       setResult(response)
       if (response.success) {
-        // Refresh contacts whether there are errors or not, as long as upload was successful
-        // This ensures new contacts are reflected even if some failed
-        setTimeout(() => {
-          onSuccess()
-          if (!response.hasErrors) {
-            // Only auto-close if there are no errors
-            handleClose()
-          }
-        }, 2000)
+        // Mark upload as successful - will refresh when user closes dialog
+        setUploadSuccessful(true)
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Upload failed")
+      setUploadSuccessful(false)
     } finally {
       setLoading(false)
     }
@@ -94,11 +90,18 @@ export function BulkUploadDialog({
       // Don't allow closing during upload
       return
     }
+    
+    // If upload was successful, refresh data before closing
+    if (uploadSuccessful) {
+      onSuccess()
+    }
+    
     setFile(null)
     setReplaceAll(false)
     setResult(null)
     setError(null)
     setLoading(false)
+    setUploadSuccessful(false)
     onOpenChange(false)
   }
 

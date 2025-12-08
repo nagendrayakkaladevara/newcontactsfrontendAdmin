@@ -529,7 +529,6 @@ export function ContactsPage() {
           onOpenChange={setIsBulkUploadOpen}
           onSuccess={() => {
             loadContacts()
-            setIsBulkUploadOpen(false)
           }}
         />
 
