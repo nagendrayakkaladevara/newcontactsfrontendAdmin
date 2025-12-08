@@ -71,10 +71,15 @@ export function BulkUploadDialog({
       setError(null)
       const response = await contactService.bulkUpload(file, replaceAll)
       setResult(response)
-      if (response.success && !response.hasErrors) {
+      if (response.success) {
+        // Refresh contacts whether there are errors or not, as long as upload was successful
+        // This ensures new contacts are reflected even if some failed
         setTimeout(() => {
           onSuccess()
-          handleClose()
+          if (!response.hasErrors) {
+            // Only auto-close if there are no errors
+            handleClose()
+          }
         }, 2000)
       }
     } catch (err) {

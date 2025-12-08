@@ -47,9 +47,10 @@ export function MultiStepLoader({
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm">
       <div className="relative flex flex-col items-center justify-center">
         {/* Close button */}
+       {/* commented this close button because it's not needed */}
         {onCancel && (
           <button
-            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-[101] p-2"
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-[101] p-2 hidden"
             onClick={(e) => {
               e.stopPropagation()
               onCancel()

@@ -366,7 +366,7 @@ export function DocumentsPage() {
                                   setIsDeleteDialogOpen(true)
                                 }}
                                 disabled={actionLoading !== null}
-                                className="border-red-700 bg-red-900/20 text-red-400 hover:bg-red-900/30 disabled:opacity-50"
+                                className="border-red-700 bg-red-900/20 text-red-400 hover:bg-red-900/30 hover:text-red-300 disabled:opacity-50"
                               >
                                 {actionLoading === `delete-${document.id}` ? (
                                   <Loader size="sm" />
