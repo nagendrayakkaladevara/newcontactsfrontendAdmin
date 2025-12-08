@@ -1,6 +1,4 @@
-"use client"
-
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { IconSquareRoundedX } from "@tabler/icons-react"
 import { cn } from "@/lib/utils"
 
